@@ -1,0 +1,170 @@
+<!-- app/views/pages/about.html.erb -->
+<section class="relative bg-green-800 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+      Our Story
+    </h1>
+    <p class="mt-6 max-w-3xl mx-auto text-xl text-amber-100">
+      Crafting unforgettable journeys since 2010
+    </p>
+  </div>
+  <%= image_tag "lions2.jpg", class: "w-full h-64 object-cover", alt: "Team hiking in mountains" %>
+</section>
+
+<!-- Vision Section -->
+<section class="py-16 bg-amber-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+      <div>
+        <div class="border-b-2 border-amber-400 w-20 mb-6"></div>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
+          Our Vision
+        </h2>
+        <p class="text-lg text-gray-700">
+          To create a world where travel is a transformative force for good—connecting people across cultures, preserving natural wonders, and empowering local communities to thrive through sustainable tourism.
+        </p>
+      </div>
+      <div class="mt-8 lg:mt-0">
+        <%= image_tag "tembo.jpg", class: "rounded-lg shadow-xl", alt: "Inspiring travel vision" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Section -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+      <div class="order-2 lg:order-1">
+        <%= image_tag "twigasingle.jpg", class: "rounded-lg shadow-xl", alt: "Our mission in action" %>
+      </div>
+      <div class="order-1 lg:order-2">
+        <div class="border-b-2 border-green-600 w-20 mb-6"></div>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
+          Our Mission
+        </h2>
+        <p class="text-lg text-gray-700">
+          To craft authentic, immersive travel experiences that respect local cultures and ecosystems while providing meaningful economic opportunities for communities. We're dedicated to showing travelers the heart and soul of each destination through carefully curated adventures that leave positive impacts.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="border-b-2 border-amber-400 w-20 mx-auto mb-6"></div>
+    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+      Why We Exist
+    </h2>
+    <p class="mt-4 text-lg text-gray-600">
+      At Kilimarvellous, we believe travel should transform lives. Our mission is to connect adventurers with authentic, sustainable experiences that respect local cultures and ecosystems.
+    </p>
+  </div>
+</section>
+
+<section class="py-16 bg-neutral-light">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+      Our Journey
+    </h2>
+    <div class="space-y-8">
+      <!-- Timeline Item -->
+      <div class="flex flex-col sm:flex-row">
+        <div class="sm:w-1/3 text-right pr-8">
+          <p class="text-amber-600 font-bold">2010</p>
+        </div>
+        <div class="sm:w-2/3 pl-8 border-l-4 border-green-800 pb-8">
+          <h3 class="text-xl font-bold text-gray-900">Founded in Adventure City</h3>
+          <p class="text-gray-600">Started with just 3 local hiking tours and a passion for sharing hidden gems.</p>
+        </div>
+      </div>
+      <!-- Add more timeline items -->
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+      Meet Our Guides
+    </h2>
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <% @team_members.each do |member| %>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <% if member.photo.attached? %>
+            <%= image_tag url_for(member.photo), class: "w-full h-64 object-cover", alt: member.name %>
+          <% else %>
+            <%= image_tag "mavelogo.png", class: "w-full h-64 object-cover", alt: member.name %>
+          <% end %>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900"><%= member.name %></h3>
+            <p class="text-amber-600"><%= member.title %></p>
+            <p class="mt-2 text-gray-600"><%= member.bio %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-amber-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+      Our Core Values
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <% @values.each do |value| %>
+        <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition">
+          <div class="mx-auto h-16 w-16 bg-<%= value[:color] %>-100 rounded-full flex items-center justify-center mb-4">
+            <%= value_icon(value[:icon], class: "h-8 w-8 text-#{value[:color]}-600") %>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900"><%= value[:title] %></h3>
+          <p class="mt-2 text-gray-600"><%= value[:description] %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-green-800 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+      <div>
+        <h2 class="text-3xl font-extrabold mb-6">
+          Responsible Tourism
+        </h2>
+        <p class="text-lg text-green-100">
+          We're committed to protecting the places we love. We promote travel that respects local cultures, supports communities, and preserves natural environments for future generations.
+        </p>
+        <%= link_to "Learn more", root_path, class: "mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-green-800 bg-amber-300 hover:bg-amber-400" %>
+      </div>
+      <div class="mt-12 lg:mt-0">
+        <%= image_tag "comunity.jpg", class: "rounded-lg shadow-xl", alt: "Conservation project" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-12">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Our Business License</h2>
+    <p class="text-gray-600">
+      We are fully licensed and registered to provide professional safari and trekking services in Tanzania. Here is a copy of our official business license:
+    </p>
+
+    <div class="bg-white shadow-md flex justify-center">
+      <%= image_tag "licence.jpg", alt: "Business License", class: "" %>
+    </div>
+</div>
+
+<section class="py-16 bg-white text-center">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-6">
+      Ready to Explore With Us?
+    </h2>
+    <div class="mt-8 flex justify-center space-x-4">
+      <%= link_to "Meet Our Guides", "#team", class: "px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-800 hover:bg-green-700" %>
+      <%= link_to "View Tours", travel_tours_path, class: "px-6 py-3 border border-transparent text-base font-medium rounded-md text-green-800 bg-amber-300 hover:bg-amber-400" %>
+    </div>
+  </div>
+</section>

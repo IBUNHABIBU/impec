@@ -1,0 +1,115 @@
+<%= form_with(model: travel_tour, local: true, html: { class: "space-y-6" }) do |form| %>
+  <% if travel_tour.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mb-6">
+      <h2><%= pluralize(travel_tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
+      <ul>
+        <% travel_tour.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div class="sm:col-span-2">
+      <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm" %>
+    </div>
+
+    <div>
+      <%= form.label :category, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.select :category, TravelTour::CATEGORIES, {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm" %>
+    </div>
+
+    <div>
+      <%= form.label :duration, "Duration (days)", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.number_field :duration, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm" %>
+    </div>
+
+    <div>
+      <%= form.label :price, class: "block text-sm font-medium text-gray-700" %>
+      <div class="mt-1 relative rounded-md shadow-sm">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <span class="text-gray-500 sm:text-sm">$</span>
+        </div>
+        <%= form.text_field :price, class: "focus:ring-green-800 focus:border-green-800 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md" %>
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <%= form.check_box :featured, class: "h-4 w-4 rounded border-gray-300 text-green-800 focus:ring-green-800" %>
+      <%= form.label :featured, "Featured Tour", class: "ml-2 block text-sm text-gray-700" %>
+    </div>
+
+    <div class="sm:col-span-2">
+      <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm" %>
+    </div>
+
+    <div class="sm:col-span-2">
+      <%= form.label :highlights, "Tour Highlights (one per line)", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :highlights, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm" %>
+    </div>
+
+    <div class="sm:col-span-2">
+      <%= form.label :includes, "What's Included (one per line)", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :includes, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm" %>
+    </div>
+
+    <div class="sm:col-span-2">
+      <%= form.label :image, "Main Tour Image", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.file_field :image, class: "mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-800 file:text-white hover:file:bg-green-700" %>
+      
+      <% if travel_tour.image.attached? %>
+        <div class="mt-2">
+          <p class="text-sm font-medium text-gray-700">Current Image</p>
+          <div class="mt-1 w-32 h-32 overflow-hidden rounded-md border border-gray-200">
+             <% if travel_tour.persisted? && travel_tour.image.attached? %>
+                <%= image_tag travel_tour.image, class: "w-full h-full object-cover" %>
+              <% elsif params.dig(:travel_tour, :image).present? %>
+                <span class="text-green-600 text-sm">Image selected (will upload on save)</span>
+              <% else %>
+                <span class="text-gray-400 text-sm">No image uploaded</span>
+              <% end %>
+          </div>
+          <div class="mt-2 flex items-center">
+            <%= form.check_box :remove_image, class: "h-4 w-4 rounded border-gray-300 text-green-800 focus:ring-green-800" %>
+            <%= form.label :remove_image, "Remove current image", class: "ml-2 block text-sm text-gray-700" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="sm:col-span-2">
+      <%= form.label :gallery_images, "Gallery Images", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.file_field :gallery_images, multiple: true, class: "mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-800 file:text-white hover:file:bg-green-700" %>
+      
+      <% if travel_tour.gallery_images.attached? %>
+        <div class="mt-2">
+          <p class="text-sm font-medium text-gray-700">Current Gallery Images</p>
+          <div class="mt-1 grid grid-cols-3 gap-2">
+            <% travel_tour.gallery_images.each do |image| %>
+              <div class="relative">
+                <% if travel_tour.persisted? && travel_tour.gallery_images.attached? %>
+                  <% travel_tour.gallery_images.each do |image| %>
+                    <div class="relative">
+                      <%= image_tag image, class: "w-full h-24 object-cover rounded-md border border-gray-200" %>
+                      <%= link_to 'Remove', purge_image_travel_tour_path(travel_tour, image_id: image.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <p class="text-gray-400 text-sm">No gallery images uploaded yet</p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="pt-5 border-t border-gray-200 flex justify-end">
+    <%= link_to "Cancel", travel_tours_path, class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800" %>
+    <%= form.submit class: "ml-3 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800" %>
+  </div>
+<% end %>
