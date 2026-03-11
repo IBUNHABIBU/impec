@@ -1,0 +1,95 @@
+<%= form_with(model: trekking) do |form| %>
+  <% if trekking.errors.any? %>
+    <div class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mb-4">
+      <h2><%= pluralize(trekking.errors.count, "error") %> prohibited this trekking from being saved:</h2>
+      <ul>
+        <% trekking.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="space-y-6">
+    <!-- Images Section -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-lg font-medium text-deep-green mb-4">Images</h3>
+      
+      <!-- Main Image -->
+      <div class="mb-6">
+        <%= form.label :main_image, "Main Featured Image", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.file_field :main_image, accept: "image/jpeg,image/png,image/webp", class: "mt-1 block w-full" %>
+        <%= form.label :main_image_alt, "Image Alt Text (for accessibility)", class: "block text-sm font-medium text-gray-700 mt-2" %>
+        <%= form.text_field :main_image_alt, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+        
+        <% if trekking.persisted? && trekking.main_image.attached? %>
+          <div class="mt-2">
+            <%= image_tag trekking.main_image, class: "h-32 w-auto rounded-lg" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Gallery Images -->
+      <div>
+        <%= form.label :gallery_images, "Additional Gallery Images", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.file_field :gallery_images, multiple: true, accept: "image/jpeg,image/png,image/webp", class: "mt-1 block w-full" %>
+        
+        <% if trekking.persisted? && trekking.gallery_images.attached? %>
+          <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <% trekking.gallery_images.each do |image| %>
+              <div class="relative">
+                <%= image_tag image, class: "h-24 w-full object-cover rounded-lg" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Basic Info -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-lg font-medium text-deep-green mb-4">Basic Information</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <%= form.label :title, "Trek Name", class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :title, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+        </div>
+        
+        <div>
+          <%= form.label :duration, "Duration (days)", class: "block text-sm font-medium text-gray-700" %>
+          <%= form.number_field :duration, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+        </div>
+        
+        <div>
+          <%= form.label :difficulty, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.select :difficulty, ['easy', 'medium', 'challenging'], {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+        </div>
+        
+        <div>
+          <%= form.label :overview_title, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :overview_title, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+        </div>
+        
+        <div class="md:col-span-2">
+          <%= form.label :overview_description, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_area :overview_description, rows: 3, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Text Content -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h3 class="text-lg font-medium text-deep-green mb-4">Detailed Content</h3>
+      <p class="text-sm text-gray-500 mb-4">Use the editor below to create detailed itinerary, highlights, and other information.</p>
+      
+      <%= form.label :content, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.rich_text_area :content, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-deep-green focus:ring-deep-green" %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <%= form.submit trekking.persisted? ? "Update Trek" : "Create Trek", class: "inline-flex justify-center rounded-md border border-amber-900 bg-green-600 py-3 px-6 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:ring-offset-2" %>
+    </div>
+  </div>
+<% end %>

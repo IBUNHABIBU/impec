@@ -1,0 +1,38 @@
+<!-- Hero Section -->
+<div class="relative h-screen min-h-[32rem] bg-gray-900 overflow-hidden">
+  
+  <!-- Background Image Slider -->
+  <% if hero.images.attached? %>
+    <div class="absolute inset-0 z-0">
+      <%= render 'home/slider', obj: hero %>
+    </div>
+  <% else %>
+    <h1>No images to display</h1>
+  <% end %>
+
+  <!-- Foreground Content -->
+  <div class="relative z-10 mx-auto w-[92%] mx-auto h-full flex items-center pr-8 sm:px-6 lg:px-8">
+    <div class="text-left max-w-3xl">
+      <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <span class="block"><%= hero.title %></span>
+        <span class="block text-amber-300"><%= hero.subtitle %></span>
+      </h1>
+      <p class="mt-6 text-xl text-gray-100 max-w-lg">
+        <%= hero.description %>
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <%= link_to "Explore Tours", "#featured-tours", class: "px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 md:py-4 md:text-lg md:px-10 transition duration-300" %>
+        <%= link_to "View Gallery", gallery_path, class: "px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-green-800 hover:bg-green-700 md:py-4 md:text-lg md:px-10 transition duration-300" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrolling Indicator -->
+  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
+    <a href="#featured-tours" class="animate-bounce inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm text-white hover:text-amber-300 transition">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </a>
+  </div>
+</div>
