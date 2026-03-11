@@ -1,0 +1,93 @@
+<nav class="bg-green-800 shadow-sm" data-controller="mobile-menu"> <!-- Deep green -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Logo and desktop menu -->
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <%= link_to root_path do %>
+            <%= image_tag "mavelogo.jpeg", alt: "Company Logo", class: "h-22 w-auto rounded-full" %>
+          <% end %>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden sm:ml-6 sm:flex sm:space-x-4">
+          <%= nav_link_to "Home", root_path %>
+          <%= nav_link_to "About Us", pages_about_path %>
+          <%= nav_link_to "Tours", travel_tours_path %>
+          <%= nav_link_to "Destinations", destinations_path %>
+          <%= nav_link_to "Trekking", trekkings_path %>
+          <%= nav_link_to "Wildlife Safari", safaris_path %>
+          <%= nav_link_to "Testimonials", testimonials_path %>
+          <%= nav_link_to "Contact Us", pages_contact_path %>
+           <% if user_signed_in? && (current_user.admin? || current_user.super_admin?) %>
+           <%= nav_link_to "Dashboard", dashboard_path %>
+          <% end %>
+
+        </div>
+      </div>
+
+      <!-- User auth links (desktop) -->
+      <div class="hidden sm:flex sm:items-center sm:space-x-4">
+        <% if user_signed_in? %>
+          <span class="text-gray-300 text-sm">Welcome, <%= current_user.first_name %></span>
+          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, 
+                      class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+        <% end %>
+        <% if user_signed_in? && (current_user.admin? || current_user.super_admin?) %>
+        
+          <%= link_to "Users", users_path, class: "text-white hover:text-golden-yellow px-3 py-2 rounded-md text-sm font-medium" %>
+        <% end %>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="flex items-center sm:hidden">
+        <button type="button" 
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-100 hover:text-amber-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-300" 
+                aria-controls="mobile-menu" 
+                aria-expanded="false" 
+                data-action="click->mobile-menu#toggle">
+          <span class="sr-only">Open main menu</span>
+          <!-- Hamburger icon -->
+          <svg class="block h-6 w-6" data-mobile-menu-target="openIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- Close icon -->
+          <svg class="hidden h-6 w-6" data-mobile-menu-target="closeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="hidden sm:hidden bg-green-700" data-mobile-menu-target="menu" id="mobile-menu">
+    <div class="pt-2 pb-3 space-y-1">
+      <%= mobile_nav_link_to "Home", root_path %>
+      <%= mobile_nav_link_to "Tours", travel_tours_path %>
+      <%= mobile_nav_link_to "Destinations", destinations_path %>
+      <%= mobile_nav_link_to "Trekking", trekkings_path %>
+      <%= mobile_nav_link_to "Testimonials", testimonials_path %>
+      <%= mobile_nav_link_to "About", pages_about_path %>
+      <%= mobile_nav_link_to "Contact Us", pages_contact_path %>
+      <%= mobile_nav_link_to "Wildlife Safari", safaris_path %>
+    </div>
+    
+    <!-- Mobile auth links -->
+    <div class="pt-4 pb-3 border-t border-green-600">
+      <div class="space-y-1 px-2">
+        <% if user_signed_in? %>
+          <div class="px-3 py-2 text-sm text-gray-100">
+            Welcome, <%= current_user.first_name %>
+          </div>
+          <%= link_to "Logout", destroy_user_session_path, 
+                      data: { turbo_method: :delete },
+                      class: "block px-3 py-2 text-base font-medium text-gray-100 hover:bg-green-600 hover:text-white" %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Overlay for mobile menu (optional) -->
+<div class="hidden fixed inset-0 bg-black bg-opacity-50 z-40" data-mobile-menu-target="overlay" data-action="click->mobile-menu#close"></div>
