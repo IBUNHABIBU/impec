@@ -1,0 +1,4 @@
+CREATE DATABASE tour_production;
+CREATE DATABASE tour_production_queue;
+CREATE DATABASE tour_production_cache;
+CREATE DATABASE tour_production_cable;
