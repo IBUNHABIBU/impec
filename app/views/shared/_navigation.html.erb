@@ -1,93 +1,151 @@
-<nav class="bg-green-800 shadow-sm" data-controller="mobile-menu"> <!-- Deep green -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
+<nav data-controller="mobile-menu" class="bg-white sticky top-0 z-50 shadow-md">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-3">
+      
       <!-- Logo and desktop menu -->
-      <div class="flex items-center">
+      <div class="flex items-center gap-8">
         <div class="flex-shrink-0">
-          <%= link_to root_path do %>
-            <%= image_tag "mavelogo.jpeg", alt: "Company Logo", class: "h-22 w-auto rounded-full" %>
+          <%= link_to root_path, class: "block" do %>
+            <%= image_tag "impeclogo.jpeg", alt: "Impeccable Africa Tour", class: "h-12 w-auto object-contain" %>
           <% end %>
         </div>
-        
-        <!-- Desktop Navigation -->
-        <div class="hidden sm:ml-6 sm:flex sm:space-x-4">
-          <%= nav_link_to "Home", root_path %>
-          <%= nav_link_to "About Us", pages_about_path %>
-          <%= nav_link_to "Tours", travel_tours_path %>
-          <%= nav_link_to "Destinations", destinations_path %>
-          <%= nav_link_to "Trekking", trekkings_path %>
-          <%= nav_link_to "Wildlife Safari", safaris_path %>
-          <%= nav_link_to "Testimonials", testimonials_path %>
-          <%= nav_link_to "Contact Us", pages_contact_path %>
-           <% if user_signed_in? && (current_user.admin? || current_user.super_admin?) %>
-           <%= nav_link_to "Dashboard", dashboard_path %>
-          <% end %>
 
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center space-x-1">
+          <%= nav_link_to "Home", root_path, class: "px-3 py-2 text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7]" %>
+          <%= nav_link_to "About Us", pages_about_path, class: "px-3 py-2 text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7]" %>
+          
+          <!-- Tours Dropdown -->
+          <div class="relative" data-controller="dropdown">
+            <button data-action="click->dropdown#toggle click@window->dropdown#hide" 
+                    class="px-3 py-2 text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7] inline-flex items-center gap-1">
+              Tours
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div data-dropdown-target="menu" 
+                 class="hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-[#FFF8E7]">
+              <%= nav_link_to "All Tours", travel_tours_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
+              <%= nav_link_to "Destinations", destinations_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
+              <%= nav_link_to "Trekking", trekkings_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
+              <%= nav_link_to "Wildlife Safari", safaris_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
+            </div>
+          </div>
+
+          <%= nav_link_to "Testimonials", testimonials_path, class: "px-3 py-2 text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7]" %>
+          <%= nav_link_to "Contact Us", pages_contact_path, class: "px-3 py-2 text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7]" %>
+
+          <% if user_signed_in? && (current_user.admin? || current_user.super_admin?) %>
+            <%= nav_link_to "Dashboard", dashboard_path, class: "px-3 py-2 text-sm font-medium text-[#A53F2B] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7] border-l-2 border-[#FFB347] ml-2" %>
+          <% end %>
         </div>
       </div>
 
       <!-- User auth links (desktop) -->
-      <div class="hidden sm:flex sm:items-center sm:space-x-4">
+      <div class="hidden lg:flex items-center gap-4">
         <% if user_signed_in? %>
-          <span class="text-gray-300 text-sm">Welcome, <%= current_user.first_name %></span>
-          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, 
-                      class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-[#2D2418] bg-[#FFF8E7] px-3 py-1.5 rounded-full">
+              Welcome, <span class="font-medium text-[#A53F2B]"><%= current_user.first_name %></span>
+            </span>
+
+            <%= link_to "Logout",
+              destroy_user_session_path,
+              data: { turbo_method: :delete },
+              class: "text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300" %>
+          </div>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "text-sm font-medium bg-[#A53F2B] text-white px-4 py-2 rounded-md hover:bg-[#8A351F] transition-colors duration-300" %>
         <% end %>
+
         <% if admin_user? %>
-        
-          <%= link_to "Bookings", bookings_path, class: "text-white hover:text-golden-yellow  py-2 rounded-md text-sm font-medium" %>
+          <%= link_to "Bookings", bookings_path, class: "ml-2 text-sm font-medium text-[#2E6B3E] hover:text-[#A53F2B] transition-colors duration-300" %>
         <% end %>
       </div>
-      
+
       <!-- Mobile menu button -->
-      <div class="flex items-center sm:hidden">
-        <button type="button" 
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-100 hover:text-amber-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-300" 
-                aria-controls="mobile-menu" 
-                aria-expanded="false" 
-                data-action="click->mobile-menu#toggle">
+      <div class="lg:hidden">
+        <button
+          type="button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] focus:outline-none"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          data-action="click->mobile-menu#toggle">
+
           <span class="sr-only">Open main menu</span>
+
           <!-- Hamburger icon -->
-          <svg class="block h-6 w-6" data-mobile-menu-target="openIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <svg data-mobile-menu-target="openIcon"
+               class="block w-6 h-6"
+               xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
+
           <!-- Close icon -->
-          <svg class="hidden h-6 w-6" data-mobile-menu-target="closeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <svg data-mobile-menu-target="closeIcon"
+               class="hidden w-6 h-6"
+               xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"/>
           </svg>
+
         </button>
       </div>
+
     </div>
   </div>
 
   <!-- Mobile menu -->
-  <div class="hidden sm:hidden bg-green-700" data-mobile-menu-target="menu" id="mobile-menu">
-    <div class="pt-2 pb-3 space-y-1">
-      <%= mobile_nav_link_to "Home", root_path %>
-      <%= mobile_nav_link_to "Tours", travel_tours_path %>
-      <%= mobile_nav_link_to "Destinations", destinations_path %>
-      <%= mobile_nav_link_to "Trekking", trekkings_path %>
-      <%= mobile_nav_link_to "Testimonials", testimonials_path %>
-      <%= mobile_nav_link_to "About", pages_about_path %>
-      <%= mobile_nav_link_to "Contact Us", pages_contact_path %>
-      <%= mobile_nav_link_to "Wildlife Safari", safaris_path %>
-    </div>
-    
-    <!-- Mobile auth links -->
-    <div class="pt-4 pb-3 border-t border-green-600">
-      <div class="space-y-1 px-2">
-        <% if user_signed_in? %>
-          <div class="px-3 py-2 text-sm text-gray-100">
-            Welcome, <%= current_user.first_name %>
-          </div>
-          <%= link_to "Logout", destroy_user_session_path, 
-                      data: { turbo_method: :delete },
-                      class: "block px-3 py-2 text-base font-medium text-gray-100 hover:bg-green-600 hover:text-white" %>
-       <% end %>
+  <div data-mobile-menu-target="menu" 
+       class="hidden lg:hidden fixed inset-0 z-40 transform transition-transform duration-300 ease-in-out translate-x-full"
+       id="mobile-menu">
+    <div class="absolute right-0 top-0 h-full w-64 bg-white shadow-xl overflow-y-auto">
+      <div class="px-4 pt-16 pb-6 space-y-1">
+        <%= mobile_nav_link_to "Home", root_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "Tours", travel_tours_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "Destinations", destinations_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "Trekking", trekkings_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "Testimonials", testimonials_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "About", pages_about_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "Contact Us", pages_contact_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+        <%= mobile_nav_link_to "Wildlife Safari", safaris_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+
+        <!-- Mobile auth links -->
+        <div class="border-t border-[#FFF8E7] mt-4 pt-4">
+          <% if user_signed_in? %>
+            <div class="px-3 py-2 text-sm text-[#2D2418]">
+              Welcome, <span class="font-medium text-[#A53F2B]"><%= current_user.first_name %></span>
+            </div>
+
+            <%= link_to "Logout",
+              destroy_user_session_path,
+              data: { turbo_method: :delete },
+              class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "block px-3 py-2 text-base font-medium text-[#2D2418] hover:text-[#A53F2B] hover:bg-[#FFF8E7] rounded-md" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</nav>
 
-<!-- Overlay for mobile menu (optional) -->
-<div class="hidden fixed inset-0 bg-black bg-opacity-50 z-40" data-mobile-menu-target="overlay" data-action="click->mobile-menu#close"></div>
+  <!-- Overlay for mobile menu -->
+  <div data-mobile-menu-target="overlay"
+       data-action="click->mobile-menu#close"
+       class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300">
+  </div>
+</nav>
