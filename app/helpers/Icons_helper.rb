@@ -53,6 +53,7 @@ module IconsHelper
         rocket_launch:  heroicon("rocket-launch", variant: :solid, options: { class: classes }),
 
         inclusivity:    heroicon("user-group", variant: :solid, options: { class: classes }),
+        integrity:      heroicon("shield-check", variant: :solid, options: { class: classes }),
       }
 
       icon_map[icon_name] || content_tag(:div, icon_name.to_s.first(2).upcase, class: classes)
