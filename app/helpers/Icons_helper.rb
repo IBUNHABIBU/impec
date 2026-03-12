@@ -50,7 +50,9 @@ module IconsHelper
         shield_check:   heroicon("shield-check", variant: :solid, options: { class: classes }),
         users:          heroicon("users", variant: :solid, options: { class: classes }),
         sparkles:       heroicon("sparkles", variant: :solid, options: { class: classes }),
-        rocket_launch:  heroicon("rocket-launch", variant: :solid, options: { class: classes })
+        rocket_launch:  heroicon("rocket-launch", variant: :solid, options: { class: classes }),
+
+        inclusivity:    heroicon("user-group", variant: :solid, options: { class: classes }),
       }
 
       icon_map[icon_name] || content_tag(:div, icon_name.to_s.first(2).upcase, class: classes)
