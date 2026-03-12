@@ -53,7 +53,7 @@ module IconsHelper
         rocket_launch:  heroicon("rocket-launch", variant: :solid, options: { class: classes }),
 
         inclusivity:    heroicon("user-group", variant: :solid, options: { class: classes }),
-        integrity:      heroicon("shield-check", variant: :solid, options: { class: classes }),
+        integrity:      heroicon("scale", variant: :solid, options: { class: classes }),
         passion:        heroicon("heart", variant: :solid, options: { class: classes }),
       }
 
