@@ -243,7 +243,7 @@
         <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow duration-300">
           <div class="w-16 h-16 bg-[#A53F2B]/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <div class="text-[#A53F2B] text-2xl">
-              <%= value_icon(value[:icon]) %>
+              <%= value_icon(value[:icon], class: "h-8 w-8 text-#{value[:color]}-600") %>
             </div>
           </div>
           <h3 class="text-lg font-bold text-gray-900 mb-2"><%= value[:title] %></h3>
