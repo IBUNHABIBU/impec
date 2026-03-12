@@ -42,9 +42,21 @@ class PagesController < ApplicationController
         # },
 
         {
-          icon: :rocket_launch,
-          title: "Adventure", 
-          description: "We craft journeys that push boundaries, ignite curiosity, and create lifelong stories.",
+          icon: :inclusivity,
+          title: "Inclusivity", 
+          description: "Travel is a right, not a privilege.",
+          color: "orange"
+        },
+         {
+          icon: :integrity,
+          title: "Integrity", 
+          description: "We operate with transparency and deep respect for our guests and the land.",
+          color: "orange"
+        },
+         {
+          icon: :passion,
+          title: "Passion", 
+          description: "Our love for Africa and its people drives every itinerary we create.",
           color: "orange"
         }
 
