@@ -14,19 +14,6 @@
         <div class="hidden lg:flex items-center space-x-1">
           <%= nav_link_to "Home", root_path, class: "px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7]" %>
           <%= nav_link_to "About Us", pages_about_path, class: "px-3 py-2 text-sm font-medium text-gray-700  hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7]" %>
-          
-          <!-- Tours Dropdown -->
-          <div class="relative" data-controller="dropdown">
-            <button data-action="click->dropdown#toggle click@window->dropdown#hide" 
-                    class="px-3 py-2 text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300 rounded-md hover:bg-[#FFF8E7] inline-flex items-center gap-1">
-              Tours
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <div data-dropdown-target="menu" 
-                 class="hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-[#FFF8E7]">
-              <%= nav_link_to "All Tours", travel_tours_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
               <%= nav_link_to "Destinations", destinations_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
               <%= nav_link_to "Trekking", trekkings_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
               <%= nav_link_to "Wildlife Safari", safaris_path, class: "block px-4 py-2 text-sm text-[#2D2418] hover:bg-[#FFF8E7] hover:text-[#A53F2B]" %>
@@ -55,10 +42,7 @@
               data: { turbo_method: :delete },
               class: "text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300" %>
           </div>
-        <% else %>
-          <%= link_to "Login", new_user_session_path, class: "text-sm font-medium text-[#2D2418] hover:text-[#A53F2B] transition-colors duration-300" %>
-          <%= link_to "Sign Up", new_user_registration_path, class: "text-sm font-medium bg-[#A53F2B] text-white px-4 py-2 rounded-md hover:bg-[#8A351F] transition-colors duration-300" %>
-        <% end %>
+      <% end %>
 
         <% if admin_user? %>
           <%= link_to "Bookings", bookings_path, class: "ml-2 text-sm font-medium text-[#2E6B3E] hover:text-[#A53F2B] transition-colors duration-300" %>
