@@ -75,7 +75,7 @@ gem "devise", "~> 4.9"
 gem 'mail'
 
 gem "heroicon", "~> 1.0"
-gem 'heroicons'
+# gem 'heroicons'
 # Gemfile
 gem 'friendly_id', '~> 5.4'
 

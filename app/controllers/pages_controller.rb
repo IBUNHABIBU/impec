@@ -58,7 +58,13 @@ class PagesController < ApplicationController
           title: "Passion", 
           description: "Our love for Africa and its people drives every itinerary we create.",
           color: "orange"
-        }
+        },
+        {
+          icon: :authenticity,
+          title: "Authenticity", 
+          description: "Genuine local experiences, not tourist traps.",
+          color: "amber"
+        },
 
   ]
     
