@@ -1,36 +1,74 @@
 <!-- Hero Section -->
-<div class="relative h-screen min-h-[32rem] bg-gray-900 overflow-hidden">
-  
+<div class="relative h-screen w-full overflow-hidden">
   <!-- Background Image Slider -->
   <% if hero.images.attached? %>
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 w-full h-full">
       <%= render 'home/slider', obj: hero %>
     </div>
   <% else %>
-    <h1>No images to display</h1>
+    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-[#A53F2B] to-[#8A351F] flex items-center justify-center">
+      <h1 class="text-white text-2xl">No images to display</h1>
+    </div>
   <% end %>
 
+  <!-- Dark Overlay for Text Readability -->
+  <div class="absolute inset-0 bg-black/40 z-10"></div>
+  
+  <!-- Gradient Overlay for Smooth Transition -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10"></div>
+
   <!-- Foreground Content -->
-  <div class="relative z-10 mx-auto w-[92%] mx-auto h-full flex items-center pr-8 sm:px-6 lg:px-8">
-    <div class="text-left max-w-3xl">
-      <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-        <span class="block"><%= hero.title %></span>
-        <span class="block text-amber-300"><%= hero.subtitle %></span>
-      </h1>
-      <p class="mt-6 text-xl text-gray-100 max-w-lg">
-        <%= hero.description %>
-      </p>
-      <div class="mt-10 flex flex-wrap gap-4">
-        <%= link_to "Explore Tours", "#featured-tours", class: "px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 md:py-4 md:text-lg md:px-10 transition duration-300" %>
-        <%= link_to "View Gallery", gallery_path, class: "px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-green-800 hover:bg-green-700 md:py-4 md:text-lg md:px-10 transition duration-300" %>
+  <div class="absolute inset-0 z-20 flex items-center justify-center">
+    <div class="container mx-auto px-4 text-center text-white">
+      <div class="max-w-4xl mx-auto">
+        <!-- Animated Badge -->
+        <div class="inline-block mb-6 animate-fade-in-up">
+          <span class="bg-[#FFB347]/20 backdrop-blur-sm text-[#FFB347] px-4 py-2 rounded-full text-sm font-medium tracking-wider border border-[#FFB347]/30">
+            Welcome to Impeccable Africa
+          </span>
+        </div>
+        
+        <!-- Main Heading with Animation -->
+        <h1 class="mb-6 animate-fade-in-up animation-delay-200">
+          <span class="block text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 drop-shadow-lg">
+            <%= hero.title %>
+          </span>
+          <span class="block text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-[#FFB347] drop-shadow-lg">
+            <%= hero.subtitle %>
+          </span>
+        </h1>
+
+        <!-- Description with Animation -->
+        <p class="text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto text-white/90 drop-shadow-lg animate-fade-in-up animation-delay-400">
+          <%= hero.description %>
+        </p>
+
+        <!-- CTA Buttons with Animation -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-600">
+          <%= link_to "Explore Tours", "#featured-tours", 
+              class: "group bg-[#FFB347] text-[#2D2418] px-8 py-4 rounded-lg font-semibold text-lg hover:bg-[#E3B23C] transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl inline-flex items-center justify-center gap-2" do %>
+            <span>Explore Tours</span>
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          <% end %>
+          
+          <%= link_to "View Gallery", gallery_path, 
+              class: "group bg-transparent text-white px-8 py-4 rounded-lg font-semibold text-lg border-2 border-white/50 hover:border-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm inline-flex items-center justify-center gap-2" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span>View Gallery</span>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Scrolling Indicator -->
-  <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
-    <a href="#featured-tours" class="animate-bounce inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm text-white hover:text-amber-300 transition">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 animate-bounce">
+    <a href="#featured-tours" class="block w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full border border-white/30 flex items-center justify-center hover:bg-white/20 transition-colors duration-300 group">
+      <svg class="w-5 h-5 text-white group-hover:text-[#FFB347] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
       </svg>
     </a>
