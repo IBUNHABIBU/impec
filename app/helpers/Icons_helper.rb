@@ -54,6 +54,7 @@ module IconsHelper
 
         inclusivity:    heroicon("user-group", variant: :solid, options: { class: classes }),
         integrity:      heroicon("shield-check", variant: :solid, options: { class: classes }),
+        passion:        heroicon("heart", variant: :solid, options: { class: classes }),
       }
 
       icon_map[icon_name] || content_tag(:div, icon_name.to_s.first(2).upcase, class: classes)
