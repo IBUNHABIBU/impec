@@ -86,7 +86,7 @@ module ApplicationHelper
   end
 
   def full_title(page_title = '')
-   base_title = "Kilimanjaro Marvellous | Tanzania Safaris"
+   base_title = "Impeccable Africa Tour| Tanzania Safaris"
     if page_title.empty?
       base_title
     else
