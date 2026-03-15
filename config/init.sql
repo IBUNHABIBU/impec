@@ -1,4 +1,4 @@
-CREATE DATABASE tour_production;
-CREATE DATABASE tour_production_queue;
-CREATE DATABASE tour_production_cache;
-CREATE DATABASE tour_production_cable;
+CREATE DATABASE impec_production;
+CREATE DATABASE impec_production_queue;
+CREATE DATABASE impec_production_cache;
+CREATE DATABASE impec_production_cable;
