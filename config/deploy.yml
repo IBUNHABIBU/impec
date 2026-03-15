@@ -13,7 +13,7 @@ servers:
   #     - 192.168.0.1
   #   cmd: bin/jobs
 
-retain_containers: 3
+retain_containers: 2
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
@@ -64,7 +64,7 @@ aliases:
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
 volumes:
-  - "tour_storage:/rails/storage"
+  - "impec_storage:/rails/storage"
 
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
@@ -88,7 +88,7 @@ builder:
 
 # Use a different ssh user than root
 ssh:
-  user: ibra
+  user: deployer
 
 accessories:
   db:
