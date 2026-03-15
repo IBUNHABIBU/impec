@@ -29,7 +29,7 @@
 
     <div>
       <%= form.label :images, class: "block text-sm font-medium text-gray-700" %>
-      <%= form.file_field :images, multiple: true, class: "mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-800 file:text-white hover:file:bg-green-700" %>
+      <%= form.file_field :images, multiple: true, class: "mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-orange-800 file:text-white hover:file:bg-green-700" %>
       
       <% if hero.images.attached? %>
         <div class="mt-2">
@@ -55,7 +55,7 @@
 
     <div class="flex items-center justify-end space-x-3">
       <%= link_to "Cancel", hero.persisted? ? hero_path(hero) : heros_path, class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800" %>
-      <%= form.submit class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800" %>
+      <%= form.submit class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800" %>
     </div>
   </div>
 <% end %>

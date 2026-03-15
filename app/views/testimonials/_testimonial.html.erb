@@ -6,7 +6,7 @@
         <%= image_tag testimonial.avatar.variant(resize_to_limit: [1200, 800]),
               loading: "lazy", class: "h-14 w-14 rounded-full object-cover border-2 border-white shadow-md", alt: testimonial.author_name %>
       <% else %>
-        <div class="h-14 w-14 bg-green-800 rounded-full flex items-center justify-center border-2 border-white shadow-md">
+        <div class="h-14 w-14 bg-orange-800 rounded-full flex items-center justify-center border-2 border-white shadow-md">
           <span class="text-white font-semibold text-lg">
             <%= testimonial.author_name[0..1].upcase %>
           </span>
