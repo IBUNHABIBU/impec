@@ -52,14 +52,13 @@
 
         <div class="w-px h-5 bg-[#FFB347]/30 mx-1"></div>
 
-        <a href="/booking/new" class="flex items-center gap-1 bg-[#FFB347] text-[#2D2418] px-3 py-1.5 rounded-md hover:bg-[#E3B23C] transition-colors duration-300 font-medium text-xs uppercase tracking-wider">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <%= link_to new_booking_path, class: "flex items-center gap-1 bg-[#FFB347] text-[#2D2418] px-3 py-1.5 rounded-md hover:bg-[#E3B23C] transition-colors duration-300 font-medium text-xs uppercase tracking-wider" do %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z">
-            </path>
+              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
           </svg>
           <span>Book Now</span>
-        </a>
+        <% end %>
       </div>
 
     </div>
