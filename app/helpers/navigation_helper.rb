@@ -29,6 +29,7 @@ module NavigationHelper
     [
       ["Home", root_path],
       ["About Us", pages_about_path],
+      ["Tours", travel_tours_path],
       ["Destinations", destinations_path],
       ["Trekking", trekkings_path],
       ["Wildlife Safari", safaris_path],
