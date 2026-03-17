@@ -175,7 +175,7 @@
             <div class="text-sm text-gray-600 text-center">per person</div>
           </div>
 
-          <%= link_to "Book This Safari", new_booking_path, class: "w-full bg-deep-green text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors text-center font-semibold block mt-4" %>
+          <%= link_to "Book This Safari", new_booking_path, class: "w-full bg-deep-green text-white py-3 px-6 rounded-lg hover:bg-orange-500 transition-colors text-center font-semibold block mt-4" %>
         </div>
       </div>
 
@@ -260,7 +260,7 @@
   <!-- Action Buttons -->
   <div class="flex justify-center gap-4 mt-12 pt-8 border-t border-gray-200">
     <%= link_to 'Edit Safari', edit_safari_path(@safari), class: "bg-golden-yellow text-charcoal px-8 py-3 rounded-lg hover:bg-yellow-500 transition-colors font-semibold" if admin_user? %>
-    <%= link_to 'Back to Safaris', safaris_path, class: "border border-deep-green text-deep-green px-8 py-3 rounded-lg hover:bg-green-700 hover:text-white transition-colors font-semibold" %>
+    <%= link_to 'Back to Safaris', safaris_path, class: "border border-deep-green text-deep-green px-8 py-3 rounded-lg hover:bg-orange-500 hover:text-white transition-colors font-semibold" %>
     <%= button_to 'Delete Safari', @safari, method: :delete, data: { confirm: 'Are you sure you want to delete this safari?' }, class: "border border-red-600 text-red-600 px-8 py-3 rounded-lg hover:bg-red-600 hover:text-white transition-colors font-semibold" if admin_user? %>
   </div>
 </div>

@@ -19,7 +19,7 @@ module NavigationHelper
     if current_page?(path)
       options[:class] += " bg-green-700 border-amber-300 text-amber-300"
     else
-      options[:class] += " border-transparent text-gray-100 hover:bg-green-600 hover:border-amber-200 hover:text-amber-200"
+      options[:class] += " border-transparent text-gray-100 hover:bg-orange-800 hover:border-amber-200 hover:text-amber-200"
     end
     
     link_to name, path, options

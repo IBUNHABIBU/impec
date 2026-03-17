@@ -59,9 +59,9 @@ module ApplicationHelper
     is_current = current_path == path || (path != root_path && current_path.start_with?(path))
     
     if is_current
-      options[:class] += " border-amber-300 bg-green-600 text-white"
+      options[:class] += " border-amber-300 bg-orange-800 text-white"
     else
-      options[:class] += " border-transparent text-gray-100 hover:bg-green-600 hover:border-amber-300 hover:text-white"
+      options[:class] += " border-transparent text-gray-100 hover:bg-orange-800 hover:border-amber-300 hover:text-white"
     end
     
     link_to text, path, options
