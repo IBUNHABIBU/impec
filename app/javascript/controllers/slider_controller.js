@@ -2,10 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="slider"
 export default class extends Controller {
-  export default class extends Controller {
   static targets = ["slides", "slide", "currentSlide", "playIcon", "pauseIcon"]
 
   connect() {
+    console.log("Slider controller connected")
     this.currentIndex = 0
     this.totalSlides = this.slideTargets.length
     this.autoplayInterval = null
@@ -20,16 +20,31 @@ export default class extends Controller {
     this.stopAutoplay()
   }
 
+  // These method names must match the data-action values
   next() {
     this.goToSlide(this.currentIndex + 1)
+    console.log("next")
   }
 
   previous() {
     this.goToSlide(this.currentIndex - 1)
+    console.log("Prev")
   }
 
-  goToSlide(event) {
-    const index = event.params?.index ?? event.currentTarget.dataset.index
+  goToSlide(index) {
+    // Handle both event and direct index calls
+    if (typeof index === 'object') {
+      // Called from event
+      index = index.params?.index ?? index.currentTarget.dataset.index
+    }
+    
+    // Ensure index is within bounds
+    if (index < 0) {
+      index = this.totalSlides - 1
+    } else if (index >= this.totalSlides) {
+      index = 0
+    }
+    
     this.currentIndex = parseInt(index)
     this.updateSlidePosition()
     this.updateIndicators()
@@ -97,4 +112,3 @@ export default class extends Controller {
     }
   }
 }
-
