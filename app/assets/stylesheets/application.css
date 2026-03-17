@@ -44,3 +44,49 @@
     'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
   }
   */
+
+  @keyframes shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.animate-shrink {
+  animation-name: shrink;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* Optional: Stack toasts if multiple appear */
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 24rem;
+}
+
+/* For Tailwind users, add to your tailwind.config.js */
+/*
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        shrink: 'shrink linear forwards',
+      },
+      keyframes: {
+        shrink: {
+          from: { width: '100%' },
+          to: { width: '0%' },
+        },
+      },
+    },
+  },
+}
+*/
