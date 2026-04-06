@@ -84,6 +84,6 @@ gem 'sitemap_generator'
 gem 'bullet', group: :development
 gem "active_storage_validations", "~> 3.0"
 
-gem "groupdate", "~> 6.7"
+gem "groupdate", "~> 6.8"
 
 gem "chartkick", "~> 5.2"
